@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: employee-service
+          uri: lb://employee
+          predicates:
+            - Path=/api/employees/**
+          filters:
+            - StripPrefix=1
+        - id: department-service
+          uri: lb://department
+          predicates:
+            - Path=/api/departments/**
+          filters:
+            - StripPrefix=1
+        - id: organization-service
+          uri: lb://organization
+          predicates:
+            - Path=/api/organizations/**
+          filters:
+            - StripPrefix=1
+    loadbalancer:
+      ribbon:
+        enabled: false

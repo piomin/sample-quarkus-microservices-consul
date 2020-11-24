@@ -1,0 +1,5 @@
+# Project exclude paths
+/department-service/target/
+/employee-service/target/
+/gateway-service/target/
+/organization-service/target/
