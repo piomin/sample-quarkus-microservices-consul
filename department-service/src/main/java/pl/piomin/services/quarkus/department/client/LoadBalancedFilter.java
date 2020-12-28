@@ -36,7 +36,7 @@ public class LoadBalancedFilter implements ClientRequestFilter {
 				LOGGER.info("Instance: uri={}:{}",
 						it.getService().getAddress(),
 						it.getService().getPort()));
-		ServiceHealth instance = instances.get(counter.getAndIncrement());
+		ServiceHealth instance = instances.get(counter.getAndIncrement()%instances.size());
 		URI u = UriBuilder.fromUri(uri)
 				.host(instance.getService().getAddress())
 				.port(instance.getService().getPort())
