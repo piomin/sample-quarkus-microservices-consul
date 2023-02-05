@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Observes;
+import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 
 import com.orbitz.consul.Consul;
@@ -27,37 +28,41 @@ public class EmployeeLifecycle {
 	private String instanceId;
 
 	@Inject
-	Consul consulClient;
+	Instance<Consul> consulClient;
 	@ConfigProperty(name = "quarkus.application.name")
 	String appName;
 	@ConfigProperty(name = "quarkus.application.version")
 	String appVersion;
 
 	void onStart(@Observes StartupEvent ev) {
-		ScheduledExecutorService executorService = Executors
-				.newSingleThreadScheduledExecutor();
-		executorService.schedule(() -> {
-			HealthClient healthClient = consulClient.healthClient();
-			List<ServiceHealth> instances = healthClient
-					.getHealthyServiceInstances(appName).getResponse();
-			instanceId = appName + "-" + instances.size();
-			int port = Integer.parseInt(System.getProperty("quarkus.http.port"));
-			ImmutableRegistration registration = ImmutableRegistration.builder()
-					.id(instanceId)
-					.name(appName)
-					.address("127.0.0.1")
-					.port(port)
-					.putMeta("version", appVersion)
-					.build();
-			consulClient.agentClient().register(registration);
-			LOGGER.info("Instance registered: id={}, address=127.0.0.1:{}",
-					registration.getId(), port);
-		}, 5000, TimeUnit.MILLISECONDS);
+		if (consulClient.isResolvable()) {
+			ScheduledExecutorService executorService = Executors
+					.newSingleThreadScheduledExecutor();
+			executorService.schedule(() -> {
+				HealthClient healthClient = consulClient.get().healthClient();
+				List<ServiceHealth> instances = healthClient
+						.getHealthyServiceInstances(appName).getResponse();
+				instanceId = appName + "-" + instances.size();
+				int port = Integer.parseInt(System.getProperty("quarkus.http.port"));
+				ImmutableRegistration registration = ImmutableRegistration.builder()
+						.id(instanceId)
+						.name(appName)
+						.address("127.0.0.1")
+						.port(port)
+						.putMeta("version", appVersion)
+						.build();
+				consulClient.get().agentClient().register(registration);
+				LOGGER.info("Instance registered: id={}, address=127.0.0.1:{}",
+						registration.getId(), port);
+			}, 5000, TimeUnit.MILLISECONDS);
+		}
 	}
 
 	void onStop(@Observes ShutdownEvent ev) {
-		consulClient.agentClient().deregister(instanceId);
-		LOGGER.info("Instance de-registered: id={}", instanceId);
+		if (consulClient.isResolvable()) {
+			consulClient.get().agentClient().deregister(instanceId);
+			LOGGER.info("Instance de-registered: id={}", instanceId);
+		}
 	}
 
 }

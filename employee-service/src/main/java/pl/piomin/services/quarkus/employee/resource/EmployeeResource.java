@@ -3,6 +3,7 @@ package pl.piomin.services.quarkus.employee.resource;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -26,6 +27,7 @@ public class EmployeeResource {
 	EmployeeRepository repository;
 
 	@POST
+	@Transactional
 	public Employee add(@Valid Employee employee) {
 		LOGGER.info("Employee add: {}", employee);
 		repository.persist(employee);

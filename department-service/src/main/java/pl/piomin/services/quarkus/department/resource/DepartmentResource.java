@@ -3,6 +3,7 @@ package pl.piomin.services.quarkus.department.resource;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -30,6 +31,7 @@ public class DepartmentResource {
 
     @Path("/")
     @POST
+    @Transactional
     public Department add(@Valid Department department) {
         LOGGER.info("Department add: {}", department);
         repository.persist(department);
@@ -46,7 +48,6 @@ public class DepartmentResource {
     @GET
     public List<Department> findAll() {
         LOGGER.info("Department find");
-        employeeClient.findByDepartment(1L);
         return repository.findAll().list();
     }
 
