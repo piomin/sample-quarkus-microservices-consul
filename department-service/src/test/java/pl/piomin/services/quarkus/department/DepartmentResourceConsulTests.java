@@ -20,7 +20,7 @@ import static org.hamcrest.Matchers.notNullValue;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class DepartmentResourceConsulTests {
 
-    @ConfigProperty(name = "department.name")
+    @ConfigProperty(name = "department.name", defaultValue = "")
     private String name;
 
     @Test
