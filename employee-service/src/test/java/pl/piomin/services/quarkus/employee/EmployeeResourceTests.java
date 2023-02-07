@@ -2,8 +2,6 @@ package pl.piomin.services.quarkus.employee;
 
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
-import org.instancio.Instancio;
-import org.instancio.Select;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -22,11 +20,12 @@ public class EmployeeResourceTests {
     @Test
     @Order(1)
     void add() {
-        Employee e = Instancio.of(Employee.class)
-                .ignore(Select.field(Employee::getId))
-                .set(Select.field(Employee::getDepartmentId), 1L)
-                .generate(Select.field(Employee::getAge), gen -> gen.ints().range(18, 65))
-                .create();
+        Employee e = new Employee();
+        e.setName("Test");
+        e.setAge(40);
+        e.setDepartmentId(1L);
+        e.setOrganizationId(1L);
+        e.setPosition("developer");
 
         given().body(e).contentType(ContentType.JSON)
                 .when().post("/employees").then()
