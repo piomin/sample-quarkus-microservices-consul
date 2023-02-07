@@ -24,12 +24,11 @@ public class DepartmentResourceTests {
     @Test
     @Order(1)
     void add() {
-        Department e = Instancio.of(Department.class)
-                .ignore(Select.field(Department::getId))
-                .set(Select.field(Department::getOrganizationId), 1L)
-                .create();
+        Department d = new Department();
+        d.setName("test");
+        d.setOrganizationId(1L);
 
-        given().body(e).contentType(ContentType.JSON)
+        given().body(d).contentType(ContentType.JSON)
                 .when().post("/departments").then()
                 .statusCode(200)
                 .body("id", notNullValue());
