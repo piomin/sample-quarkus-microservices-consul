@@ -27,7 +27,7 @@ public class LoadBalancedFilter implements ClientRequestFilter {
 		HealthClient healthClient = consulClient.healthClient();
 		List<ServiceHealth> instances = healthClient
 				.getHealthyServiceInstances(uri.getHost()).getResponse();
-		ServiceHealth instance = instances.get(counter.getAndIncrement());
+		ServiceHealth instance = instances.get(counter.getAndIncrement()%instances.size());
 		URI u = UriBuilder.fromUri(uri)
 				.host(instance.getService().getAddress())
 				.port(instance.getService().getPort())
