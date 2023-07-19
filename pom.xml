@@ -13,7 +13,7 @@
 		<sonar.projectKey>piomin_sample-quarkus-microservices-consul</sonar.projectKey>
 		<sonar.organization>piomin</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
-		<quarkus.version>2.16.8.Final</quarkus.version>
+		<quarkus.version>3.2.1.Final</quarkus.version>
 		<consul-client.version>1.5.3</consul-client.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>11</maven.compiler.source>
