@@ -25,6 +25,3 @@ spring:
             - Path=/api/organizations/**
           filters:
             - StripPrefix=1
-    loadbalancer:
-      ribbon:
-        enabled: false
