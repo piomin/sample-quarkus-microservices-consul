@@ -2,7 +2,7 @@ package pl.piomin.services.quarkus.employee.repository;
 
 import java.util.List;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import pl.piomin.services.quarkus.employee.model.Employee;
