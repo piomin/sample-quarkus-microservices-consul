@@ -80,7 +80,7 @@
 		<dependency>
 			<groupId>io.quarkus</groupId>
 			<artifactId>quarkus-consul-config</artifactId>
-			<version>3.0.0.Beta1</version>
+			<version>${quarkus-consul.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>io.rest-assured</groupId>
