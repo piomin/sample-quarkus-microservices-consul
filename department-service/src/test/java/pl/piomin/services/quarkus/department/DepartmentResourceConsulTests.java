@@ -15,32 +15,33 @@ import static io.restassured.RestAssured.when;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 
-//@QuarkusTest
-//@QuarkusTestResource(ConsulResource.class, rest)
-//@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@QuarkusTest
+@QuarkusTestResource(ConsulResource.class)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class DepartmentResourceConsulTests {
 
-//    @ConfigProperty(name = "department.name", defaultValue = "")
-//    private String name;
+    @ConfigProperty(name = "department.name", defaultValue = "")
+    private String name;
 
-//    @Test
-//    @Order(1)
-//    void add() {
-//        Department d = new Department();
-//        d.setOrganizationId(1L);
-//        d.setName(name);
-//
-//        given().body(d).contentType(ContentType.JSON)
-//                .when().post("/departments").then()
-//                .statusCode(200)
-//                .body("id", notNullValue());
-//    }
+    @Test
+    @Order(1)
+    void add() {
+        Department d = new Department();
+        d.setOrganizationId(1L);
+        d.setName(name);
 
-//    @Test
-//    @Order(2)
-//    void findAll() {
-//        when().get("/departments").then()
-//                .statusCode(200)
-//                .body("size()", is(1));
-//    }
+        given().body(d).contentType(ContentType.JSON)
+                .when().post("/departments").then()
+                .statusCode(200)
+                .body("id", notNullValue())
+                .body("name", is(name));
+    }
+
+    @Test
+    @Order(2)
+    void findAll() {
+        when().get("/departments").then()
+                .statusCode(200)
+                .body("size()", is(1));
+    }
 }

@@ -12,7 +12,7 @@ public class ConsulResource implements QuarkusTestResourceLifecycleManager {
 
     @Override
     public Map<String, String> start() {
-        consulContainer = new ConsulContainer("consul:1.14")
+        consulContainer = new ConsulContainer("hashicorp/consul:latest")
                 .withConsulCommand("kv put config/department department.name=abc");
 
         consulContainer.start();

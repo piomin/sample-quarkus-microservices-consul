@@ -12,6 +12,7 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 
+import org.eclipse.microprofile.rest.client.inject.RestClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.piomin.services.quarkus.department.client.EmployeeClient;
@@ -24,10 +25,14 @@ public class DepartmentResource {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DepartmentResource.class);
 
-    @Inject
-    DepartmentRepository repository;
-    @Inject
-    EmployeeClient employeeClient;
+    private DepartmentRepository repository;
+    private EmployeeClient employeeClient;
+
+    public DepartmentResource(DepartmentRepository repository,
+                              @RestClient EmployeeClient employeeClient) {
+        this.repository = repository;
+        this.employeeClient = employeeClient;
+    }
 
     @Path("/")
     @POST
@@ -61,7 +66,7 @@ public class DepartmentResource {
     @Path("/organization/{organizationId}/with-employees")
     @GET
     public List<Department> findByOrganizationWithEmployees(@PathParam("organizationId") Long organizationId) {
-        LOGGER.info("Department find: organizationId={}", organizationId);
+        LOGGER.info("Department find with employees: organizationId={}", organizationId);
         List<Department> departments = repository.findByOrganization(organizationId);
         departments.forEach(d -> d.setEmployees(employeeClient.findByDepartment(d.getId())));
         return departments;

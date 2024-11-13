@@ -18,7 +18,7 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>io.quarkus</groupId>
+				<groupId>io.quarkus.platform</groupId>
 				<artifactId>quarkus-maven-plugin</artifactId>
 				<version>${quarkus.version}</version>
 				<executions>
@@ -39,7 +39,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>io.quarkus</groupId>
-			<artifactId>quarkus-resteasy-jackson</artifactId>
+			<artifactId>quarkus-rest-jackson</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>io.quarkus</groupId>
@@ -68,18 +68,21 @@
 			<version>1.18.32</version>
 		</dependency>
 		<dependency>
-			<groupId>org.jsoup</groupId>
-			<artifactId>jsoup</artifactId>
-			<version>1.17.2</version>
+			<groupId>io.smallrye.stork</groupId>
+			<artifactId>stork-service-registration-consul</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.orbitz.consul</groupId>
-			<artifactId>consul-client</artifactId>
-			<version>${consul-client.version}</version>
+			<groupId>io.smallrye.stork</groupId>
+			<artifactId>stork-service-discovery-consul</artifactId>
 		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>org.jsoup</groupId>-->
+<!--			<artifactId>jsoup</artifactId>-->
+<!--			<version>1.17.2</version>-->
+<!--		</dependency>-->
 		<dependency>
-			<groupId>io.quarkus</groupId>
-			<artifactId>quarkus-consul-config</artifactId>
+			<groupId>io.quarkiverse.config</groupId>
+			<artifactId>quarkus-config-consul</artifactId>
 			<version>${quarkus-consul.version}</version>
 		</dependency>
 		<dependency>
