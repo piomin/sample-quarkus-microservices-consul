@@ -12,9 +12,9 @@ import jakarta.ws.rs.core.MediaType;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 import pl.piomin.services.quarkus.organization.model.Department;
 
-@Singleton
+//@Singleton
 @Path("/departments")
-@RegisterRestClient
+@RegisterRestClient(baseUri = "stork://employee-service")
 public interface DepartmentClient {
 
     @GET

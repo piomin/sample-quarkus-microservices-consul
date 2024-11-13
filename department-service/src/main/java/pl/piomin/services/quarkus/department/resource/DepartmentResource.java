@@ -12,6 +12,7 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 
+import org.eclipse.microprofile.rest.client.inject.RestClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.piomin.services.quarkus.department.client.EmployeeClient;
@@ -27,6 +28,7 @@ public class DepartmentResource {
     @Inject
     DepartmentRepository repository;
     @Inject
+    @RestClient
     EmployeeClient employeeClient;
 
     @Path("/")
