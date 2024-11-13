@@ -15,8 +15,6 @@
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 		<quarkus.version>3.16.1</quarkus.version>
 		<quarkus-consul.version>2.4.0</quarkus-consul.version>
-<!--		<consul-client.version>1.5.3</consul-client.version>-->
-<!--		<stork.version>2.7.1</stork.version>-->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>21</maven.compiler.source>
 		<maven.compiler.target>21</maven.compiler.target>
