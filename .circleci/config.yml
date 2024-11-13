@@ -9,10 +9,8 @@ jobs:
       - run:
           name: Analyze on SonarCloud
           command: mvn verify sonar:sonar -DskipTests
-  build:
-    executor:
-      name: docker/machine
-      image: ubuntu-2204:2024.01.2
+  test:
+    executor: machine_executor_amd64
     steps:
       - checkout
       - run:
@@ -24,11 +22,9 @@ jobs:
             sudo update-alternatives --set javac /usr/lib/jvm/java-21-openjdk-amd64/bin/javac
             java -version
             export JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64
-      - maven/with_cache:
-          steps:
-            - run:
-                name: Build Images
-                command: mvn clean package
+      - run:
+          name: Maven Tests
+          command: mvn test
 
 orbs:
   maven: circleci/maven@1.4.1
@@ -37,10 +33,16 @@ executors:
   jdk:
     docker:
       - image: 'cimg/openjdk:21.0'
+  machine_executor_amd64:
+    machine:
+      image: ubuntu-2204:2023.10.1
+    environment:
+      architecture: "amd64"
+      platform: "linux/amd64"
 
 workflows:
   maven_test:
     jobs:
-      - build
+      - test
       - analyze:
           context: SonarCloud
