@@ -17,7 +17,7 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 
 @QuarkusTest
-@TestProfile(DisableExternalProfile.class)
+//@TestProfile(DisableExternalProfile.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class DepartmentResourceTests {
 
@@ -39,7 +39,7 @@ public class DepartmentResourceTests {
     void findAll() {
         when().get("/departments").then()
                 .statusCode(200)
-                .body("size()", is(1));
+                .body("size()", is(2));
     }
 
     @Test
@@ -55,7 +55,7 @@ public class DepartmentResourceTests {
     void findByOrganizationId() {
         when().get("/departments/organization/{organizationId}", 1).then()
                 .statusCode(200)
-                .body("size()", is(1));
+                .body("size()", is(2));
     }
 
     @Test

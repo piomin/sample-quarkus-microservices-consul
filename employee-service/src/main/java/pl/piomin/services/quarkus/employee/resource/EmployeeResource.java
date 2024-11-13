@@ -22,9 +22,11 @@ import pl.piomin.services.quarkus.employee.repository.EmployeeRepository;
 public class EmployeeResource {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeResource.class);
+    private EmployeeRepository repository;
 
-    @Inject
-    EmployeeRepository repository;
+    public EmployeeResource(EmployeeRepository repository) {
+        this.repository = repository;
+    }
 
     @POST
     @Transactional

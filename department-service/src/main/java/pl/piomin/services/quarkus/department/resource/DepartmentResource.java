@@ -25,11 +25,14 @@ public class DepartmentResource {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DepartmentResource.class);
 
-    @Inject
-    DepartmentRepository repository;
-    @Inject
-    @RestClient
-    EmployeeClient employeeClient;
+    private DepartmentRepository repository;
+    private EmployeeClient employeeClient;
+
+    public DepartmentResource(DepartmentRepository repository,
+                              @RestClient EmployeeClient employeeClient) {
+        this.repository = repository;
+        this.employeeClient = employeeClient;
+    }
 
     @Path("/")
     @POST
@@ -63,7 +66,7 @@ public class DepartmentResource {
     @Path("/organization/{organizationId}/with-employees")
     @GET
     public List<Department> findByOrganizationWithEmployees(@PathParam("organizationId") Long organizationId) {
-        LOGGER.info("Department find: organizationId={}", organizationId);
+        LOGGER.info("Department find with employees: organizationId={}", organizationId);
         List<Department> departments = repository.findByOrganization(organizationId);
         departments.forEach(d -> d.setEmployees(employeeClient.findByDepartment(d.getId())));
         return departments;
