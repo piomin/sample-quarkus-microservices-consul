@@ -18,7 +18,7 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>io.quarkus</groupId>
+				<groupId>io.quarkus.platform</groupId>
 				<artifactId>quarkus-maven-plugin</artifactId>
 				<version>${quarkus.version}</version>
 				<executions>
@@ -74,6 +74,14 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<version>1.18.32</version>
+		</dependency>
+		<dependency>
+			<groupId>io.smallrye.stork</groupId>
+			<artifactId>stork-service-discovery-consul</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.smallrye.stork</groupId>
+			<artifactId>stork-service-registration-consul</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.jsoup</groupId>
