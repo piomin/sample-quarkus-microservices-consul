@@ -9,10 +9,29 @@ jobs:
       - run:
           name: Analyze on SonarCloud
           command: mvn verify sonar:sonar -DskipTests
+  build:
+    executor:
+      name: docker/machine
+      image: ubuntu-2204:2024.01.2
+    steps:
+      - checkout
+      - run:
+          name: Install OpenJDK 21
+          command: |
+            java -version
+            sudo apt-get update && sudo apt-get install openjdk-21-jdk
+            sudo update-alternatives --set java /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+            sudo update-alternatives --set javac /usr/lib/jvm/java-21-openjdk-amd64/bin/javac
+            java -version
+            export JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64
+      - maven/with_cache:
+          steps:
+            - run:
+                name: Build Images
+                command: mvn clean package
 
 orbs:
   maven: circleci/maven@1.4.1
-  tcc: atomicjar/testcontainers-cloud-orb@0.1.0
 
 executors:
   jdk:
@@ -22,10 +41,6 @@ executors:
 workflows:
   maven_test:
     jobs:
-      - maven/test:
-          executor: jdk
-          context: Testcontainers
-          pre-steps:
-            - tcc/setup
+      - build
       - analyze:
           context: SonarCloud
