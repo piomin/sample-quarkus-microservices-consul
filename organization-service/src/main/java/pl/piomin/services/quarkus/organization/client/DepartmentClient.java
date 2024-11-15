@@ -14,7 +14,7 @@ import pl.piomin.services.quarkus.organization.model.Department;
 
 //@Singleton
 @Path("/departments")
-@RegisterRestClient(baseUri = "stork://employee-service")
+@RegisterRestClient(baseUri = "stork://department-service")
 public interface DepartmentClient {
 
     @GET

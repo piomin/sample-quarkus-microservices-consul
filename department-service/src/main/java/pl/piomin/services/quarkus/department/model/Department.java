@@ -3,10 +3,7 @@ package pl.piomin.services.quarkus.department.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Transient;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -21,7 +18,7 @@ import lombok.ToString;
 public class Department {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull
     private Long organizationId;
