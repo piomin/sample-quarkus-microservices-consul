@@ -1,0 +1,13 @@
+services:
+  consul:
+    image: hashicorp/consul:latest
+    environment:
+      - CONSUL_BIND_INTERFACE=eth0
+    volumes:
+      - consul_data:/consul/data
+    ports:
+      - "8500:8500"
+      - "8600:8600/udp"
+    restart: always
+volumes:
+  consul_data:

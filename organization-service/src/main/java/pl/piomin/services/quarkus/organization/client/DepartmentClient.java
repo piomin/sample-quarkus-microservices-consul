@@ -12,7 +12,6 @@ import jakarta.ws.rs.core.MediaType;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 import pl.piomin.services.quarkus.organization.model.Department;
 
-//@Singleton
 @Path("/departments")
 @RegisterRestClient(baseUri = "stork://department-service")
 public interface DepartmentClient {

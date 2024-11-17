@@ -2,7 +2,6 @@ package pl.piomin.services.quarkus.department.resource;
 
 import java.util.List;
 
-import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.GET;
@@ -13,8 +12,7 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 
 import org.eclipse.microprofile.rest.client.inject.RestClient;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.jboss.logging.Logger;
 import pl.piomin.services.quarkus.department.client.EmployeeClient;
 import pl.piomin.services.quarkus.department.model.Department;
 import pl.piomin.services.quarkus.department.repository.DepartmentRepository;
@@ -23,13 +21,14 @@ import pl.piomin.services.quarkus.department.repository.DepartmentRepository;
 @Produces(MediaType.APPLICATION_JSON)
 public class DepartmentResource {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(DepartmentResource.class);
-
+    private Logger logger;
     private DepartmentRepository repository;
     private EmployeeClient employeeClient;
 
-    public DepartmentResource(DepartmentRepository repository,
+    public DepartmentResource(Logger logger,
+                              DepartmentRepository repository,
                               @RestClient EmployeeClient employeeClient) {
+        this.logger = logger;
         this.repository = repository;
         this.employeeClient = employeeClient;
     }
@@ -38,7 +37,7 @@ public class DepartmentResource {
     @POST
     @Transactional
     public Department add(@Valid Department department) {
-        LOGGER.info("Department add: {}", department);
+        logger.infof("Department add: %s", department);
         repository.persist(department);
         return department;
     }
@@ -46,27 +45,27 @@ public class DepartmentResource {
     @Path("/{id}")
     @GET
     public Department findById(@PathParam("id") Long id) {
-        LOGGER.info("Department find: id={}", id);
+        logger.infof("Department find: id=%d", id);
         return repository.findById(id);
     }
 
     @GET
     public List<Department> findAll() {
-        LOGGER.info("Department find");
+        logger.infof("Department find");
         return repository.findAll().list();
     }
 
     @Path("/organization/{organizationId}")
     @GET
     public List<Department> findByOrganization(@PathParam("organizationId") Long organizationId) {
-        LOGGER.info("Department find: organizationId={}", organizationId);
+        logger.infof("Department find: organizationId=%d", organizationId);
         return repository.findByOrganization(organizationId);
     }
 
     @Path("/organization/{organizationId}/with-employees")
     @GET
     public List<Department> findByOrganizationWithEmployees(@PathParam("organizationId") Long organizationId) {
-        LOGGER.info("Department find with employees: organizationId={}", organizationId);
+        logger.infof("Department find with employees: organizationId=%d", organizationId);
         List<Department> departments = repository.findByOrganization(organizationId);
         departments.forEach(d -> d.setEmployees(employeeClient.findByDepartment(d.getId())));
         return departments;

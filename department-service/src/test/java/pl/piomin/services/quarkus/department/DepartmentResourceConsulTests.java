@@ -42,6 +42,6 @@ public class DepartmentResourceConsulTests {
     void findAll() {
         when().get("/departments").then()
                 .statusCode(200)
-                .body("size()", is(1));
+                .body("size()", is(4));
     }
 }

@@ -39,7 +39,7 @@ public class DepartmentResourceTests {
     void findAll() {
         when().get("/departments").then()
                 .statusCode(200)
-                .body("size()", is(2));
+                .body("size()", is(5));
     }
 
     @Test
@@ -55,7 +55,7 @@ public class DepartmentResourceTests {
     void findByOrganizationId() {
         when().get("/departments/organization/{organizationId}", 1).then()
                 .statusCode(200)
-                .body("size()", is(2));
+                .body("size()", is(5));
     }
 
     @Test
