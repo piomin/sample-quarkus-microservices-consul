@@ -1,6 +1,7 @@
 package pl.piomin.services.quarkus.employee;
 
 import io.quarkus.test.junit.QuarkusTest;
+import io.quarkus.test.junit.TestProfile;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
@@ -14,6 +15,7 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 
 @QuarkusTest
+@TestProfile(DisableExternalProfile.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class EmployeeResourceTests {
 
