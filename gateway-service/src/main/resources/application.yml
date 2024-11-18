@@ -8,19 +8,19 @@ spring:
           enabled: true
       routes:
         - id: employee-service
-          uri: lb://employee
+          uri: lb://employee-service
           predicates:
             - Path=/api/employees/**
           filters:
             - StripPrefix=1
         - id: department-service
-          uri: lb://department
+          uri: lb://department-service
           predicates:
             - Path=/api/departments/**
           filters:
             - StripPrefix=1
         - id: organization-service
-          uri: lb://organization
+          uri: lb://organization-service
           predicates:
             - Path=/api/organizations/**
           filters:

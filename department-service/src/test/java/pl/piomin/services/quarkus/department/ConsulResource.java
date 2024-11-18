@@ -19,18 +19,20 @@ public class ConsulResource implements QuarkusTestResourceLifecycleManager {
                         department.name=abc
                         quarkus.datasource.db-kind=h2
                         quarkus.hibernate-orm.database.generation=drop-and-create
+                        quarkus.stork.department-service.service-registrar.type=consul
                         EOF
                         """
-//                        "kv put config/department-service department.name=abc",
-//                        "kv put config/department-service quarkus.datasource.db-kind=h2",
-//                        "kv put config/department-service quarkus.hibernate-orm.database.generation=drop-and-create"
                 );
 
         consulContainer.start();
 
         String url = consulContainer.getHost() + ":" + consulContainer.getFirstMappedPort();
 
-        return ImmutableMap.of("quarkus.consul-config.agent.host-port", url);
+        return ImmutableMap.of(
+                "quarkus.consul-config.agent.host-port", url,
+                "consul.host", consulContainer.getHost(),
+                "consul.port", consulContainer.getFirstMappedPort().toString()
+        );
     }
 
     @Override

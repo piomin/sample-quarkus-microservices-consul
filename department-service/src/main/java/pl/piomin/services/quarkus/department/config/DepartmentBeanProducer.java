@@ -22,19 +22,4 @@ public class DepartmentBeanProducer {
                 .setPort(port));
     }
 
-//    @ConfigProperty(name = "client.employee.uri", defaultValue = "http://localhost:8080")
-//    String employeeUri;
-
-//    @Produces
-//    LoadBalancedFilter filter = new LoadBalancedFilter(consulClient());
-//
-//    @Produces
-//    EmployeeClient employeeClient() throws URISyntaxException {
-//        URIBuilder builder = new URIBuilder(employeeUri);
-//        return RestClientBuilder.newBuilder()
-//                .baseUri(builder.build())
-//                .register(filter)
-//                .build(EmployeeClient.class);
-//    }
-
 }

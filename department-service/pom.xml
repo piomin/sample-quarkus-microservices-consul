@@ -88,6 +88,10 @@
             <artifactId>stork-service-registration-consul</artifactId>
         </dependency>
         <dependency>
+            <groupId>io.smallrye.stork</groupId>
+            <artifactId>stork-load-balancer-least-response-time</artifactId>
+        </dependency>
+        <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-scheduler</artifactId>
         </dependency>

@@ -38,7 +38,7 @@ public class OrganizationResource {
 
     @POST
     public Organization add(@Valid Organization organization) {
-        logger.infof("Organization add: {}", organization);
+        logger.infof("Organization add: %s", organization);
         repository.persist(organization);
         return organization;
     }
@@ -52,14 +52,14 @@ public class OrganizationResource {
     @Path("/{id}")
     @GET
     public Organization findById(@PathParam("id") Long id) {
-        logger.infof("Organization find: id={}", id);
+        logger.infof("Organization find: id=%s", id);
         return repository.findById(id);
     }
 
     @Path("/{id}/with-departments")
     @GET
     public Organization findByIdWithDepartments(@PathParam("id") Long id) {
-        logger.infof("Organization find with departments: id={}", id);
+        logger.infof("Organization find with departments: id=%d", id);
         Organization organization = repository.findById(id);
         organization.setDepartments(departmentClient.findByOrganization(organization.getId()));
         return organization;
@@ -68,7 +68,7 @@ public class OrganizationResource {
     @Path("/{id}/with-departments-and-employees")
     @GET
     public Organization findByIdWithDepartmentsAndEmployees(@PathParam("id") Long id) {
-        logger.infof("Organization find with departments and employees: id={}", id);
+        logger.infof("Organization find with departments and employees: id=%d", id);
         Organization organization = repository.findById(id);
         organization.setDepartments(departmentClient.findByOrganizationWithEmployees(organization.getId()));
         return organization;
@@ -77,7 +77,7 @@ public class OrganizationResource {
     @Path("/{id}/with-employees")
     @GET
     public Organization findByIdWithEmployees(@PathParam("id") Long id) {
-        logger.infof("Organization find with employees: id={}", id);
+        logger.infof("Organization find with employees: id=%d", id);
         Organization organization = repository.findById(id);
         organization.setEmployees(employeeClient.findByOrganization(organization.getId()));
         return organization;

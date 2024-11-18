@@ -15,7 +15,7 @@ public class OrganizationBeanProducer {
     @ConfigProperty(name = "consul.port", defaultValue = "8500") int port;
 
     @Produces
-    @LookupIfProperty(name = "quarkus.stork.employee-service.service-registrar.type", stringValue = "consul")
+    @LookupIfProperty(name = "quarkus.stork.organization-service.service-registrar.type", stringValue = "consul")
     public ConsulClient consulClient(Vertx vertx) {
         return ConsulClient.create(vertx, new ConsulClientOptions()
                 .setHost(host)

@@ -42,7 +42,7 @@ public class OrganizationLifecycle {
                                 .setAddress("localhost")
                                 .setName(appName)
                                 .setId(appName  + "-" + port),
-                        result -> logger.infof("Service %s registered", appName));
+                        result -> logger.infof("Service %s-%d registered", appName, port));
             }, 3000, TimeUnit.MILLISECONDS);
         }
     }
@@ -50,7 +50,7 @@ public class OrganizationLifecycle {
     void onStop(@Observes ShutdownEvent ev) {
         if (consulClient.isResolvable()) {
             consulClient.get().deregisterService(appName + "-" + port,
-                    result -> logger.infof("Service %s deregistered", appName));
+                    result -> logger.infof("Service %s-%d deregistered", appName, port));
         }
     }
 }
