@@ -1,7 +1,6 @@
 package pl.piomin.services.quarkus.employee.config;
 
 import io.quarkus.arc.lookup.LookupIfProperty;
-import io.quarkus.arc.properties.IfBuildProperty;
 import io.vertx.core.Vertx;
 import io.vertx.ext.consul.ConsulClient;
 import io.vertx.ext.consul.ConsulClientOptions;

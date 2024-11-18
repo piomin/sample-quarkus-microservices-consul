@@ -17,7 +17,7 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 
 @QuarkusTest
-//@TestProfile(DisableExternalProfile.class)
+@TestProfile(DisableExternalProfile.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class DepartmentResourceTests {
 

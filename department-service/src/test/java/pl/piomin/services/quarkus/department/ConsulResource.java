@@ -13,7 +13,10 @@ public class ConsulResource implements QuarkusTestResourceLifecycleManager {
     @Override
     public Map<String, String> start() {
         consulContainer = new ConsulContainer("hashicorp/consul:latest")
-                .withConsulCommand("kv put config/department department.name=abc");
+                .withConsulCommand("kv put config/department-service department.name=abc")
+                .withConsulCommand("kv put config/department-service quarkus.datasource.db-kind = h2")
+                .withConsulCommand("kv put config/department-service quarkus.hibernate-orm.database.generation")
+                .withConsulCommand("kv put config/department-service department.name=abc");
 
         consulContainer.start();
 
