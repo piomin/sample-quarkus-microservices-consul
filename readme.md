@@ -5,7 +5,8 @@ In this project I'm demonstrating you the most interesting features of [Quarkus 
 
 ## Getting Started 
 Currently, you may find here some examples of microservices implementation using different projects from Quarkus. Here's a full list of available examples in this repository:
-1. Using Quarkus for building microservices that may be easily deployed outside Kubernetes. Integrating Quarkus with Consul discovery and KV store. The example is available in the branch [master](https://github.com/piomin/sample-quarkus-microservices-consul/tree/master). A detailed guide may be find in the following article: Detailed description can be found here: [Quarkus Microservices with Consul Discovery](https://piotrminkowski.com/2020/11/24/quarkus-microservices-with-consul-discovery/)
+1. Using Quarkus for building microservices that may be easily deployed outside Kubernetes. Integrating Quarkus with Consul discovery and KV store. The example is available in the branch [master](https://github.com/piomin/sample-quarkus-microservices-consul/tree/master). A detailed guide may be found in the following article: Detailed description can be found here: [Quarkus Microservices with Consul Discovery](https://piotrminkowski.com/2020/11/24/quarkus-microservices-with-consul-discovery/)
+2. [Latest] Quarkus with SmallRye Stork and Mutiny Consul Client. The example is available in the branch [Consul with Quarkus and SmallRye Stork](https://github.com/piomin/sample-quarkus-microservices-consul/tree/master). 
 
 ## Usage
 1. Maven 3.6.3+
@@ -15,7 +16,9 @@ Currently, you may find here some examples of microservices implementation using
 docker run -d --name=consul -e CONSUL_BIND_INTERFACE=eth0 -p 8500:8500 consul
 ```
 4. Run applications:
-$ mvn compile quarkus:dev
+```shell
+mvn compile quarkus:dev
+```
 
 ## Architecture
 Our sample microservices-based system consists of the following modules:
