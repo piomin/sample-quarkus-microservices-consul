@@ -1,6 +1,6 @@
 services:
   consul:
-    image: hashicorp/consul:1.20
+    image: hashicorp/consul:1.21
     environment:
       - CONSUL_BIND_INTERFACE=eth0
     volumes:
