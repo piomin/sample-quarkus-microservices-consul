@@ -4,12 +4,10 @@ import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
 import io.smallrye.mutiny.Uni;
-import io.vertx.ext.consul.CheckOptions;
 import io.vertx.ext.consul.ConsulClient;
 import io.vertx.ext.consul.Service;
 import io.vertx.ext.consul.ServiceList;
 import jakarta.inject.Inject;
-import lombok.extern.slf4j.Slf4j;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
@@ -18,7 +16,6 @@ import org.junit.jupiter.api.TestMethodOrder;
 import pl.piomin.services.quarkus.department.model.Department;
 
 import java.time.Duration;
-import java.time.temporal.TemporalUnit;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
@@ -26,9 +23,7 @@ import static io.restassured.RestAssured.when;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@Slf4j
 @QuarkusTest
 @QuarkusTestResource(ConsulResource.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
