@@ -30,6 +30,8 @@ public class ConsulResource implements QuarkusTestResourceLifecycleManager {
 
         return ImmutableMap.of(
                 "quarkus.consul-config.agent.host-port", url,
+                "quarkus.stork.department-service.service-discovery.consul-port", consulContainer.getFirstMappedPort().toString(),
+                "quarkus.stork.department-service.service-registrar.consul-port", consulContainer.getFirstMappedPort().toString(),
                 "consul.host", consulContainer.getHost(),
                 "consul.port", consulContainer.getFirstMappedPort().toString()
         );
