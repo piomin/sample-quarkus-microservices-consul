@@ -20,6 +20,7 @@ public class ConsulResource implements QuarkusTestResourceLifecycleManager {
                         quarkus.datasource.db-kind=h2
                         quarkus.hibernate-orm.database.generation=drop-and-create
                         quarkus.stork.department-service.service-registrar.type=consul
+                        quarkus.stork.department-service.service-discovery.type=consul
                         EOF
                         """
                 );
@@ -30,6 +31,8 @@ public class ConsulResource implements QuarkusTestResourceLifecycleManager {
 
         return ImmutableMap.of(
                 "quarkus.consul-config.agent.host-port", url,
+                "quarkus.stork.department-service.service-discovery.consul-port", consulContainer.getFirstMappedPort().toString(),
+                "quarkus.stork.department-service.service-registrar.consul-port", consulContainer.getFirstMappedPort().toString(),
                 "consul.host", consulContainer.getHost(),
                 "consul.port", consulContainer.getFirstMappedPort().toString()
         );

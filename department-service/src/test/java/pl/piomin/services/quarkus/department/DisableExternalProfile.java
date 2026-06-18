@@ -10,6 +10,7 @@ public class DisableExternalProfile implements QuarkusTestProfile {
     @Override
     public Map<String, String> getConfigOverrides() {
         return Map.of(
+                "quarkus.stork.department-service.service-registrar.enabled", "false",
                 "quarkus.consul-config.enabled", "false",
                 "department.name", "abc",
                 "quarkus.datasource.db-kind", "h2",

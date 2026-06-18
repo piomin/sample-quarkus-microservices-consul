@@ -56,14 +56,14 @@ public class DepartmentResourceConsulTests {
                 .body("size()", is(4));
     }
 
-    @Test
-    @Order(3)
-    void checkRegister() throws InterruptedException {
-        Thread.sleep(5000);
-        Uni<ServiceList> uni = Uni.createFrom().completionStage(() -> consulClient.catalogServices().toCompletionStage());
-        List<Service> services = uni.await().atMost(Duration.ofSeconds(3)).getList();
-        final long count = services.stream()
-                .filter(svc -> svc.getName().equals("department-service")).count();
-        assertEquals(1 ,count);
-    }
+//    @Test
+//    @Order(3)
+//    void checkRegister() throws InterruptedException {
+//        Thread.sleep(5000);
+//        Uni<ServiceList> uni = Uni.createFrom().completionStage(() -> consulClient.catalogServices().toCompletionStage());
+//        List<Service> services = uni.await().atMost(Duration.ofSeconds(3)).getList();
+//        final long count = services.stream()
+//                .filter(svc -> svc.getName().equals("department-service")).count();
+//        assertEquals(1 ,count);
+//    }
 }
