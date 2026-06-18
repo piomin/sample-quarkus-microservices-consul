@@ -20,6 +20,7 @@ public class ConsulResource implements QuarkusTestResourceLifecycleManager {
                         quarkus.datasource.db-kind=h2
                         quarkus.hibernate-orm.database.generation=drop-and-create
                         quarkus.stork.department-service.service-registrar.type=consul
+                        quarkus.stork.department-service.service-discovery.type=consul
                         EOF
                         """
                 );
