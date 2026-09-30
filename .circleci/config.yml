@@ -26,7 +26,7 @@ executors:
       - image: 'cimg/openjdk:25.0.4'
   machine_executor_amd64:
     machine:
-      image: ubuntu-2204:current
+      image: ubuntu-2604:current
     environment:
       architecture: "amd64"
       platform: "linux/amd64"
