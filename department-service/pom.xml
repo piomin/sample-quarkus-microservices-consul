@@ -33,6 +33,12 @@
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${surefire-plugin.version}</version>
+                <configuration>
+                    <systemPropertyVariables>
+                        <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+                    </systemPropertyVariables>
+                    <shutdown>exit</shutdown>
+                </configuration>
             </plugin>
         </plugins>
     </build>
@@ -119,14 +125,8 @@
         </dependency>
         <dependency>
             <groupId>org.testcontainers</groupId>
-            <artifactId>consul</artifactId>
-            <version>1.21.4</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.testcontainers</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <version>1.21.4</version>
+            <artifactId>testcontainers-consul</artifactId>
+            <version>2.0.5</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
