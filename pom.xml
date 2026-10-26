@@ -17,7 +17,7 @@
         <quarkus-consul.version>2.6.0</quarkus-consul.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>21</maven.compiler.release>
-        <surefire-plugin.version>3.6.0</surefire-plugin.version>
+        <surefire-plugin.version>3.6.1</surefire-plugin.version>
     </properties>
 
     <modules>
